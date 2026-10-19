@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Vaniya 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blush:#ffe4ec; --petal:#ffc2d4; --rose:#ff5a86; --berry:#7a1f45; --cream:#fff9fb; --butter:#ffd873;
+  --hand:'Caveat','Comic Sans MS',cursive; --body:'Fredoka','Trebuchet MS',sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{
+  font-family:var(--body); color:var(--berry); overflow-x:hidden;
+  background:radial-gradient(circle at 20% 15%,#fff0f5 0,transparent 45%),radial-gradient(circle at 85% 85%,#ffd0df 0,transparent 50%),var(--blush);
+  -webkit-tap-highlight-color:transparent; touch-action:manipulation;
+}
+#bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.float{position:absolute;bottom:-60px;animation:rise linear forwards;opacity:.8}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.pop{position:fixed;pointer-events:none;z-index:50;font-size:22px;animation:pop .9s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--dx),var(--dy)) scale(1.4);opacity:0}}
+main{position:relative;z-index:1;min-height:100%;display:grid;place-items:center;padding:24px 16px}
+.scene{display:none;width:min(460px,100%);text-align:center;background:var(--cream);border-radius:36px;padding:34px 26px 30px;
+  box-shadow:0 0 0 5px var(--petal),0 18px 0 -6px #ffa9c4,0 30px 50px -20px rgba(122,31,69,.35)}
+.scene.on{display:block;animation:enter .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes enter{from{transform:scale(.88) rotate(-2deg);opacity:0}}
+h1,h2{font-family:var(--hand);font-weight:700;line-height:1.05}
+h1{font-size:3.2rem} h2{font-size:2.5rem}
+p{line-height:1.55;font-size:1.08rem}
+.big{font-size:5.5rem;line-height:1;display:inline-block;margin:6px 0 10px}
+.beat{animation:beat 1.2s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+button{font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:999px;padding:13px 26px;margin-top:18px;
+  background:var(--rose);color:#fff;box-shadow:0 5px 0 #d63a67;transition:transform .12s,box-shadow .12s}
+button:hover{transform:translateY(-2px)}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 #d63a67}
+button:focus-visible,input:focus-visible{outline:3px solid var(--butter);outline-offset:3px}
+button.soft{background:var(--petal);color:var(--berry);box-shadow:0 5px 0 #f09ab5}
+.hide{visibility:hidden}
+#letter{text-align:left;min-height:210px;font-size:1.15rem}
+#letter p{margin-bottom:12px}
+#letter p:first-child{font-family:var(--hand);font-size:2rem;line-height:1}
+.clock{font-variant-numeric:tabular-nums;font-size:2rem;font-weight:600;color:var(--rose);margin:6px 0 2px}
+.small{font-size:.92rem;opacity:.8}
+#sand{font-size:3.4rem;display:inline-block;transition:transform .25s}
+input[type=range]{width:100%;margin:18px 0 8px;accent-color:var(--rose);height:28px}
+#need{min-height:3.2em;font-weight:500}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.card{margin:0;padding:0;height:128px;border-radius:22px;background:var(--petal);color:var(--berry);box-shadow:0 5px 0 #f09ab5;
+  font-size:.98rem;line-height:1.3;display:grid;place-items:center;padding:10px}
+.card.open{background:var(--butter);box-shadow:0 5px 0 #e9b83f;animation:wiggle .5s}
+.card .e{font-size:2.2rem;display:block;margin-bottom:4px}
+@keyframes wiggle{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+.row{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;min-height:110px}
+#yes{transition:transform .25s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+#no{background:#b9a3ae;box-shadow:0 5px 0 #9a8590;z-index:20}
+#no.run{position:fixed}
+.conf{position:fixed;top:-40px;z-index:40;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(540deg)}}
+@media (prefers-reduced-motion:reduce){.float,.beat,.conf{animation:none!important}.scene.on{animation:none}}
+</style>
+</head>
+<body>
+<div id="bg" aria-hidden="true"></div>
+<main>
+
+<!-- 0: envelope -->
+<section class="scene on" id="s0">
+  <div class="big beat">💌</div>
+  <h1>Hey <span data-her></span>…</h1>
+  <p>I made something for you.<br>It’s a little bit silly and a lot sorry.</p>
+  <button data-go="1">Open it 🥺</button>
+</section>
+
+<!-- 1: letter -->
+<section class="scene" id="s1">
+  <div id="letter" aria-live="polite"></div>
+  <button id="n1" class="hide" data-go="2">Keep going 💗</button>
+</section>
+
+<!-- 2: all the time -->
+<section class="scene" id="s2">
+  <div id="sand">⏳</div>
+  <h2>All the time in the world</h2>
+  <p class="small">Time I’ve spent thinking about you since you opened this:</p>
+  <div class="clock" id="clock">0:00:00</div>
+  <p class="small">(and it’s not stopping)</p>
+  <label for="t" class="small" style="display:block;margin-top:14px">How much time do you need? Slide it.</label>
+  <input id="t" type="range" min="0" max="100" value="0">
+  <p id="need">Take whatever you need, my heart.</p>
+  <button data-go="3">Okay, one more thing</button>
+</section>
+
+<!-- 3: promises -->
+<section class="scene" id="s3">
+  <h2>Tiny promises</h2>
+  <p class="small">Tap each card. They’re all real.</p>
+  <div class="cards" id="cards"></div>
+  <button id="n3" class="hide" data-go="4">So… 🥹</button>
+</section>
+
+<!-- 4: forgive -->
+<section class="scene" id="s4">
+  <div class="big beat">🧸</div>
+  <h2>Will you forgive me?</h2>
+  <p id="plead">I’m holding a very small, very sad bear.</p>
+  <div class="row">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No</button>
+  </div>
+</section>
+
+<!-- 5: yay -->
+<section class="scene" id="s5">
+  <div class="big beat">💖</div>
+  <h1>Thank you, my heart</h1>
+  <p><span data-her></span>, you’re my favourite person in the whole world, and I’ll keep proving it every day.<br><br>I love you. Always.</p>
+  <p style="font-family:var(--hand);font-size:2rem;margin-top:10px">Yours, <span data-me></span> 🫶</p>
+  <button class="soft" data-go="0">Watch again</button>
+</section>
+
+</main>
+<script>
+const HER = "Vaniya", ME = "Ans";   // change names here
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const wait = ms => new Promise(r => setTimeout(r, ms));
+$$("[data-her]").forEach(e => e.textContent = HER);
+$$("[data-me]").forEach(e => e.textContent = ME);
+document.title = "For " + HER + " 💌";
+
+/* floating background */
+const bits = ["💗","💖","🌸","✨","🧸","💕"];
+setInterval(() => {
+  const e = document.createElement("span");
+  e.className = "float"; e.textContent = bits[Math.random()*bits.length|0];
+  e.style.left = Math.random()*100 + "vw"; e.style.fontSize = 16 + Math.random()*26 + "px";
+  e.style.animationDuration = 8 + Math.random()*8 + "s";
+  $("#bg").appendChild(e); setTimeout(() => e.remove(), 17000);
+}, 650);
+
+/* tap sparkle */
+document.addEventListener("pointerdown", ev => {
+  for (let i = 0; i < 4; i++) {
+    const e = document.createElement("span"); e.className = "pop"; e.textContent = bits[Math.random()*bits.length|0];
+    e.style.left = ev.clientX + "px"; e.style.top = ev.clientY + "px";
+    e.style.setProperty("--dx", (Math.random()*90-45) + "px"); e.style.setProperty("--dy", (-30-Math.random()*70) + "px");
+    document.body.appendChild(e); setTimeout(() => e.remove(), 900);
+  }
+});
+
+/* scenes */
+let run = 0, clockTimer;
+function go(n) {
+  run++; clearInterval(clockTimer);
+  $$(".scene").forEach(s => s.classList.remove("on"));
+  $("#s" + n).classList.add("on");
+  if (n === 1) letter(run);
+  if (n === 2) startClock();
+  if (n === 3) resetCards();
+  if (n === 4) resetNo();
+  if (n === 5) confetti();
+}
+$$("[data-go]").forEach(b => b.addEventListener("click", () => go(+b.dataset.go)));
+
+/* letter */
+async function letter(id) {
+  const box = $("#letter"); box.innerHTML = ""; $("#n1").classList.add("hide");
+  const lines = [HER + ",", "I’m sorry. Really, truly sorry.", "You are my heart, and I never want to be the reason it aches.", "So here’s everything I have: my time, my patience, and both of my ears."];
+  for (const l of lines) {
+    const p = document.createElement("p"); box.appendChild(p);
+    for (const ch of l) { if (id !== run) return; p.textContent += ch; await wait(26); }
+    await wait(420);
+  }
+  if (id === run) $("#n1").classList.remove("hide");
+}
+
+/* time */
+function startClock() {
+  const t0 = Date.now(); const el = $("#clock");
+  const tick = () => { const s = (Date.now()-t0)/1000|0; el.textContent = (s/3600|0) + ":" + String((s%3600)/60|0).padStart(2,"0") + ":" + String(s%60).padStart(2,"0"); };
+  tick(); clockTimer = setInterval(tick, 1000);
+  $("#t").value = 0; setNeed(0);
+}
+const needs = [[10,"A little space? Take it, my heart."],[35,"A day? Take it. I’ll be right here."],[65,"A whole week? Take it. I’ll wait."],[99,"A month? Take it. I’m not going anywhere."],[101,"All of it. All the time in the world. ∞ It’s yours."]];
+function setNeed(v) {
+  $("#need").textContent = needs.find(n => v < n[0] || (v >= 100 && n[0] === 101))[1];
+  $("#sand").style.transform = "rotate(" + v*3.6 + "deg) scale(" + (1 + v/200) + ")";
+  $("#sand").textContent = v >= 100 ? "♾️" : "⏳";
+}
+$("#t").addEventListener("input", e => setNeed(+e.target.value));
+
+/* promise cards */
+const promises = [["🍿","Movie night. You pick, zero complaints."],["🤗","One very long hug. No timer."],["🍫","Your favourite treat, delivered."],["📵","Phone down. Full attention. Just you."]];
+function resetCards() {
+  const box = $("#cards"); box.innerHTML = ""; $("#n3").classList.add("hide");
+  promises.forEach(([e, t]) => {
+    const b = document.createElement("button"); b.className = "card"; b.innerHTML = "<span><span class='e'>🎁</span>tap me</span>";
+    b.onclick = () => {
+      if (b.classList.contains("open")) return;
+      b.classList.add("open"); b.innerHTML = "<span><span class='e'>" + e + "</span>" + t + "</span>";
+      if ($$(".card.open").length === promises.length) $("#n3").classList.remove("hide");
+    };
+    box.appendChild(b);
+  });
+}
+
+/* forgive me */
+const pleas = ["Are you sure? 🥺","Pleaseee, I brought chocolate","The bear is crying now 😭","I’ll do the dishes for a year","Look at the bear’s face!","Okay, I’m still not moving 🧸","You can’t resist this, can you? 💗"];
+let nos = 0;
+function resetNo() {
+  nos = 0; const no = $("#no"); no.classList.remove("run"); no.style.left = no.style.top = "";
+  $("#yes").style.transform = ""; $("#plead").textContent = "I’m holding a very small, very sad bear.";
+}
+function dodge(ev) {
+  ev.preventDefault(); const no = $("#no"); nos++;
+  $("#plead").textContent = pleas[(nos-1) % pleas.length];
+  $("#yes").style.transform = "scale(" + Math.min(1 + nos*0.22, 3.2) + ")";
+  no.classList.add("run");
+  const w = no.offsetWidth, h = no.offsetHeight;
+  no.style.left = Math.random()*(innerWidth - w - 20) + 10 + "px";
+  no.style.top = Math.random()*(innerHeight - h - 20) + 10 + "px";
+}
+$("#no").addEventListener("pointerenter", dodge);
+$("#no").addEventListener("pointerdown", dodge);
+$("#no").addEventListener("click", dodge);
+$("#yes").addEventListener("click", () => go(5));
+
+/* confetti */
+function confetti() {
+  const set = ["💖","💗","🌸","✨","🧸","💕","🎀"];
+  for (let i = 0; i < 70; i++) setTimeout(() => {
+    const e = document.createElement("span"); e.className = "conf"; e.textContent = set[Math.random()*set.length|0];
+    e.style.left = Math.random()*100 + "vw"; e.style.fontSize = 18 + Math.random()*24 + "px";
+    e.style.animationDuration = 3 + Math.random()*3 + "s";
+    document.body.appendChild(e); setTimeout(() => e.remove(), 6500);
+  }, i*45);
+}
+</script>
+</body>
+</html>
